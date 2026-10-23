@@ -1,0 +1,13 @@
+{
+  "_note": "Chronological log of the owner's restaurant visits. Written by the log_visit tool, read by recent_visits and visits_by_companion.",
+  "_schema": {
+    "id": "visit-{iso-date}-{place-slug}",
+    "place_slug": "gloria-shoreditch",
+    "visited_on": "2026-06-28",
+    "verdict": "recommend | skip | neutral",
+    "companions": ["Priya", "+447700900001"],
+    "note": "free text",
+    "logged_at": "iso datetime — when the owner told the agent"
+  },
+  "visits": []
+}

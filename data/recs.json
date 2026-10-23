@@ -1,0 +1,432 @@
+{
+  "list_name": "Anisha's recs",
+  "description": "Places I've been and would send a friend to. Grow this by texting the agent 'add X in Y to recs'.",
+  "places": [
+    {
+      "slug": "berenjak-soho",
+      "name": "Berenjak",
+      "area": "Soho",
+      "cuisine": "Persian",
+      "vegetarian_friendly": true,
+      "my_note": "Great kababs, share the mezze. Book ahead."
+    },
+    {
+      "slug": "gloria-shoreditch",
+      "name": "Gloria",
+      "area": "Shoreditch",
+      "cuisine": "Italian",
+      "vegetarian_friendly": true,
+      "my_note": "Pasta delivers. Great for groups."
+    },
+    {
+      "slug": "dishoom-shoreditch",
+      "name": "Dishoom Shoreditch",
+      "area": "Shoreditch",
+      "cuisine": "Indian",
+      "vegetarian_friendly": true,
+      "my_note": "Always a safe bet. Veggie stuff is great."
+    },
+    {
+      "slug": "padella-borough",
+      "name": "Padella",
+      "area": "Borough",
+      "cuisine": "Italian",
+      "vegetarian_friendly": true,
+      "my_note": "Walk-in only, queue moves fast. Pici cacio e pepe."
+    },
+    {
+      "slug": "smoking-goat-shoreditch",
+      "name": "Smoking Goat",
+      "area": "Shoreditch",
+      "cuisine": "Thai",
+      "vegetarian_friendly": false,
+      "my_note": "Fish sauce wings. No small bookings."
+    },
+    {
+      "slug": "roti-king-euston",
+      "name": "Roti King",
+      "area": "Euston",
+      "cuisine": "Malaysian",
+      "vegetarian_friendly": true,
+      "my_note": "Roti canai + dal. Cheap, cash-friendly, no bookings."
+    },
+    {
+      "slug": "oranj-restaurant-wine-bar-cafe",
+      "name": "Oranj \u2022 Restaurant, Wine Bar & Cafe",
+      "area": "Shoreditch",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "two-twins-tacos",
+      "name": "Two Twins Tacos",
+      "area": "Brixton",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "spring-street-pizza",
+      "name": "Spring Street Pizza",
+      "area": "Bankside",
+      "cuisine": "Pizza",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "scully",
+      "name": "Scully",
+      "area": "St James's",
+      "cuisine": "Fine dining",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "kioku-by-endo-restaurant",
+      "name": "Kioku by Endo Restaurant",
+      "area": "Westminster",
+      "cuisine": "Japanese",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "taste-of-india-pure-vegetarian-ltd",
+      "name": "Taste of India Pure Vegetarian LTD",
+      "area": "Manor Park",
+      "cuisine": "Vegetarian",
+      "vegetarian_friendly": null,
+      "my_note": "The most authentic South Indian!"
+    },
+    {
+      "slug": "lauretta-s-pizzeria",
+      "name": "Lauretta\u2019s Pizzeria",
+      "area": "Bethnal Green",
+      "cuisine": "Pizza",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "plaza-khao-gaeng-borough-yards",
+      "name": "Plaza Khao Gaeng Borough Yards",
+      "area": "Southwark",
+      "cuisine": "Thai",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "pockets",
+      "name": "Pockets",
+      "area": "Hackney",
+      "cuisine": "Takeaway",
+      "vegetarian_friendly": null,
+      "my_note": "The best pita pocket in the world"
+    },
+    {
+      "slug": "brigadiers",
+      "name": "Brigadiers",
+      "area": "City",
+      "cuisine": "Indian",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "trinco-dulwich",
+      "name": "Trinco Dulwich",
+      "area": "East Dulwich",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "lenny-s-apizza",
+      "name": "Lenny\u2019s Apizza",
+      "area": "Finsbury Park",
+      "cuisine": "Pizza",
+      "vegetarian_friendly": null,
+      "my_note": "",
+      "temporarily_closed": true
+    },
+    {
+      "slug": "2210-by-nattycancook",
+      "name": "2210 by NattyCanCook",
+      "area": "Herne Hill",
+      "cuisine": "Caribbean",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "hanbaagaasuuteeki",
+      "name": "Hanbaagaasuuteeki",
+      "area": "Belgravia",
+      "cuisine": "Hamburger",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "jikoni",
+      "name": "Jikoni",
+      "area": "Marylebone",
+      "cuisine": "Asian fusion",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "kamara-bar-soho",
+      "name": "Kamara Bar Soho",
+      "area": "Soho",
+      "cuisine": "Bar",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "mambow",
+      "name": "Mambow",
+      "area": "Lower Clapton",
+      "cuisine": "Malaysian",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "shankeys",
+      "name": "Shankeys",
+      "area": "Hackney",
+      "cuisine": "Irish",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "mexican-seoul",
+      "name": "Mexican Seoul",
+      "area": "Bow",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "manteca",
+      "name": "manteca",
+      "area": "Shoreditch",
+      "cuisine": "Italian",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "flour-grape",
+      "name": "Flour & Grape",
+      "area": "Southwark",
+      "cuisine": "Italian",
+      "vegetarian_friendly": null,
+      "my_note": "Great cheap pasta"
+    },
+    {
+      "slug": "kricket-shoreditch",
+      "name": "Kricket Shoreditch",
+      "area": "Shoreditch",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "my_note": "Great breakfast too"
+    },
+    {
+      "slug": "the-kernel-spa-road",
+      "name": "The Kernel Spa Road",
+      "area": "Bermondsey",
+      "cuisine": "Brewery",
+      "vegetarian_friendly": null,
+      "my_note": "End your tour of the beer mile here - food is really good"
+    },
+    {
+      "slug": "soma-soho",
+      "name": "SOMA Soho",
+      "area": "Soho",
+      "cuisine": "Bar",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "blackrock-london",
+      "name": "BlackRock - London",
+      "area": "City",
+      "cuisine": "Bar",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "a-bar-with-shapes-for-a-name",
+      "name": "A Bar with Shapes for a Name",
+      "area": "Hoxton",
+      "cuisine": "Cocktail bar",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "khao-so-i",
+      "name": "Khao So-i",
+      "area": "Fitzrovia",
+      "cuisine": "Thai",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "toad-bakery",
+      "name": "TOAD Bakery",
+      "area": "Camberwell",
+      "cuisine": "Bakery",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "chatsworth-bakehouse",
+      "name": "Chatsworth Bakehouse",
+      "area": "Crystal Palace",
+      "cuisine": "Bakery",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "mr-bao-taiwanese-restaurant-peckham",
+      "name": "Mr Bao - Taiwanese Restaurant Peckham",
+      "area": "Peckham",
+      "cuisine": "Taiwanese",
+      "vegetarian_friendly": null,
+      "my_note": "Best bottomless brunch + great food"
+    },
+    {
+      "slug": "the-dusty-knuckle-bakery",
+      "name": "The Dusty Knuckle Bakery",
+      "area": "Dalston",
+      "cuisine": "Bakery",
+      "vegetarian_friendly": null,
+      "my_note": "Breakfast sandwiches"
+    },
+    {
+      "slug": "nandine",
+      "name": "Nandine",
+      "area": "Camberwell",
+      "cuisine": "Middle Eastern",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "acme-fire-cult",
+      "name": "Acme Fire Cult",
+      "area": "Dalston",
+      "cuisine": "Grill",
+      "vegetarian_friendly": null,
+      "my_note": "BBQ but still has decent veg options"
+    },
+    {
+      "slug": "osteria-angelina",
+      "name": "Osteria Angelina",
+      "area": "Bermondsey",
+      "cuisine": "Italian",
+      "vegetarian_friendly": null,
+      "my_note": "Italian Japanese"
+    },
+    {
+      "slug": "kolamba-east-sri-lankan-restaurant-liverpool-street",
+      "name": "Kolamba East - Sri Lankan Restaurant Liverpool Street",
+      "area": "Shoreditch",
+      "cuisine": "Sri Lankan",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "the-devonshire",
+      "name": "The Devonshire",
+      "area": "Soho",
+      "cuisine": "Pub",
+      "vegetarian_friendly": null,
+      "my_note": "Classic British pub"
+    },
+    {
+      "slug": "the-water-house-project",
+      "name": "The Water House Project",
+      "area": "Bethnal Green",
+      "cuisine": "British",
+      "vegetarian_friendly": null,
+      "my_note": "Amazing seasonal set menu",
+      "temporarily_closed": true
+    },
+    {
+      "slug": "casa-fof",
+      "name": "Casa Fof\u00f3",
+      "area": "Hackney",
+      "cuisine": "Fine dining",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "bao-city",
+      "name": "BAO City",
+      "area": "City",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "hakata-ramen-bar",
+      "name": "Hakata Ramen + Bar",
+      "area": "Southwark",
+      "cuisine": "Ramen",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "pophams-london-fields",
+      "name": "Pophams London Fields",
+      "area": "Hackney",
+      "cuisine": "Bakery",
+      "vegetarian_friendly": null,
+      "my_note": "Bakery + Great Pasta"
+    },
+    {
+      "slug": "normah-s",
+      "name": "Normah's",
+      "area": "Bayswater",
+      "cuisine": "Malaysian",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    },
+    {
+      "slug": "gymkhana",
+      "name": "Gymkhana",
+      "area": "Mayfair",
+      "cuisine": "Indian",
+      "vegetarian_friendly": null,
+      "my_note": "Michelin Indian but worth it"
+    },
+    {
+      "slug": "agora-souvla-bar",
+      "name": "AGORA souvla bar",
+      "area": "Southwark",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "my_note": "One of my fav restaurants in London"
+    },
+    {
+      "slug": "crisp-w1",
+      "name": "Crisp W1",
+      "area": "Mayfair",
+      "cuisine": "Pizza",
+      "vegetarian_friendly": null,
+      "my_note": "Best NY Style Pizza"
+    },
+    {
+      "slug": "tangra",
+      "name": "Tangra",
+      "area": "Soho",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "my_note": "Fully Veg"
+    },
+    {
+      "slug": "bubala-soho",
+      "name": "Bubala Soho",
+      "area": "Soho",
+      "cuisine": "Middle Eastern",
+      "vegetarian_friendly": null,
+      "my_note": ""
+    }
+  ]
+}

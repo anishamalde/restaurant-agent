@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv*/
+venv/
+.env
+.env.local
+
+# AWS SAM
+.aws-sam/
+.aws-sam-metadata/
+
+# AgentCore CLI state
+restaurantAgent/agentcore/.cli/
+restaurantAgent/agentcore/cdk/cdk.out/
+restaurantAgent/**/node_modules/
+
+# macOS
+.DS_Store
+
+# IDE / local agent settings
+.claude/settings.local.json
+.vscode/
+.idea/
+*.swp
+
+# Secrets & account-specific config — NEVER commit these
+samconfig.toml
+lambda/samconfig.toml
+restaurantAgent/agentcore/aws-targets.json
+
+# Data-bootstrap scratch output
+scripts/tools/*_enrichment_out.json
+scripts/tools/enrichment_out.json

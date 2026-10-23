@@ -1,0 +1,414 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Restaurant agent — WhatsApp webhook, tool Lambdas, S3 data bucket, and an AgentCore Gateway exposing the tools to the harness.
+
+Parameters:
+  HarnessArn:
+    Type: String
+    Description: ARN of the deployed AgentCore harness. Leave empty for the first deploy; update after `agentcore deploy`.
+    Default: ""
+  DataBucketName:
+    Type: String
+    Description: Globally-unique S3 bucket name for recs.json / want-to-go.json / visit-log.json / availability.json.
+  OwnerWhatsAppNumber:
+    Type: String
+    Description: E.164 number authorized to write (e.g. +447700900000).
+  GoogleMapsApiKey:
+    Type: String
+    Description: Google Places API + Distance Matrix API key.
+    NoEcho: true
+  MetaToken:
+    Type: String
+    Description: WhatsApp Cloud API access token. Placeholder OK for first deploy.
+    NoEcho: true
+    Default: "placeholder"
+  MetaPhoneId:
+    Type: String
+    Description: WhatsApp sender phone-number ID. Placeholder OK for first deploy.
+    Default: "placeholder"
+  MetaVerifyToken:
+    Type: String
+    Description: Meta webhook verify token. Placeholder OK for first deploy.
+    NoEcho: true
+    Default: "placeholder"
+  MetaAppSecret:
+    Type: String
+    Description: Meta app secret (App settings > Basic). Used to verify X-Hub-Signature-256 on inbound webhooks. Leave empty and the webhook rejects every POST.
+    NoEcho: true
+    Default: ""
+
+Conditions:
+  HasHarnessArn: !Not [!Equals [!Ref HarnessArn, ""]]
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Timeout: 30
+    MemorySize: 256
+    Architectures: [arm64]
+    Environment:
+      Variables:
+        LOG_LEVEL: INFO
+
+Resources:
+
+  # ── S3 bucket for the data files ──────────────────────────────────────────
+  DataBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref DataBucketName
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      VersioningConfiguration:
+        Status: Enabled
+
+  # ── WhatsApp webhook — receives Meta events ───────────────────────────────
+  WhatsAppWebhook:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: agent-fc-whatsapp-webhook
+      Handler: whatsapp_webhook.handler
+      CodeUri: .
+      Timeout: 60
+      Environment:
+        Variables:
+          HARNESS_ARN: !Ref HarnessArn
+          META_VERIFY_TOKEN: !Ref MetaVerifyToken
+          META_APP_SECRET: !Ref MetaAppSecret
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - bedrock-agentcore:InvokeHarness
+                - bedrock-agentcore:InvokeAgentRuntime
+              # Placeholder on the first deploy (before the harness exists) keeps the policy valid.
+              Resource: !If
+                - HasHarnessArn
+                - !Ref HarnessArn
+                - !Sub "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:harness/not-yet-deployed"
+            - Effect: Allow
+              Action:
+                - lambda:InvokeFunction
+              Resource:
+                - !GetAtt RestaurantRead.Arn
+                - !GetAtt AddPlace.Arn
+                - !GetAtt LogVisit.Arn
+                - !GetAtt WhatsAppSend.Arn
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            Path: /webhook
+            Method: ANY
+
+  # ── Inline function: WhatsApp outbound ────────────────────────────────────
+  WhatsAppSend:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: agent-fc-whatsapp-send
+      Handler: whatsapp_send.handler
+      CodeUri: .
+      Environment:
+        Variables:
+          META_TOKEN: !Ref MetaToken
+          META_PHONE_ID: !Ref MetaPhoneId
+
+  # ── Tool: add_place (owner-only writes to S3) ──────────────────
+  AddPlace:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: agent-fc-add-place
+      Handler: add_place.handler
+      CodeUri: .
+      Environment:
+        Variables:
+          DATA_BUCKET: !Ref DataBucketName
+          OWNER_WHATSAPP_NUMBER: !Ref OwnerWhatsAppNumber
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref DataBucketName
+
+  # ── Tool: log_visit (owner-only writes to S3) ──────────────────
+  LogVisit:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: agent-fc-log-visit
+      Handler: log_visit.handler
+      CodeUri: .
+      Environment:
+        Variables:
+          DATA_BUCKET: !Ref DataBucketName
+          OWNER_WHATSAPP_NUMBER: !Ref OwnerWhatsAppNumber
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref DataBucketName
+
+  # ── Restaurant read tools — one Lambda dispatching on tool_name ───────────
+  # Invoked by Gateway (or the webhook) for each read tool. Simple
+  # request/response — no SSE, no session state, no long-lived connections.
+  RestaurantRead:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: agent-fc-restaurant-read
+      Handler: restaurant_read.handler
+      CodeUri: .
+      Timeout: 15
+      MemorySize: 512
+      Environment:
+        Variables:
+          DATA_BUCKET: !Ref DataBucketName
+          GOOGLE_MAPS_API_KEY: !Ref GoogleMapsApiKey
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref DataBucketName
+
+  # ── AgentCore Gateway — server-side tool dispatch ─────────────────────────
+  # Gateway lets the AgentCore harness (and playground!) invoke tools
+  # server-side, so we don't have to run the tool-use loop in the webhook
+  # for read/write intents. The webhook still owns `send_whatsapp` (a side
+  # effect it shouldn't hand to auto-dispatch).
+  #
+  # Auth: IAM (SigV4). The harness's execution role invokes Gateway.
+  # Outbound: Gateway invokes our Lambdas using GatewayRole below.
+
+  GatewayRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: bedrock-agentcore.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: InvokeToolLambdas
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: lambda:InvokeFunction
+                Resource:
+                  - !GetAtt RestaurantRead.Arn
+                  - !GetAtt AddPlace.Arn
+                  - !GetAtt LogVisit.Arn
+
+  Gateway:
+    Type: AWS::BedrockAgentCore::Gateway
+    Properties:
+      Name: restaurant-agent-tools
+      RoleArn: !GetAtt GatewayRole.Arn
+      AuthorizerType: AWS_IAM
+      ProtocolType: MCP
+      Description: Server-side tool dispatch for the restaurant agent harness.
+
+  # 8 read tools on one target -> the restaurant-read Lambda dispatches internally
+  RestaurantReadTarget:
+    Type: AWS::BedrockAgentCore::GatewayTarget
+    Properties:
+      GatewayIdentifier: !Ref Gateway
+      Name: restaurantRead
+      CredentialProviderConfigurations:
+        - CredentialProviderType: GATEWAY_IAM_ROLE
+      TargetConfiguration:
+        Mcp:
+          Lambda:
+            LambdaArn: !GetAtt RestaurantRead.Arn
+            ToolSchema:
+              InlinePayload:
+                - Name: list_by_area
+                  Description: Filter the owner's saved list (recs or want-to-go) by London neighbourhood. Case-insensitive substring match.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      name:
+                        Type: string
+                        Description: Which list to search - recs (been to and liked) or want-to-go (wishlist).
+                      area:
+                        Type: string
+                        Description: Neighbourhood name, e.g. Shoreditch.
+                    Required: [name, area]
+                - Name: find_place
+                  Description: Fuzzy-match a place name across both saved lists. Returns matches sorted by similarity.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      query:
+                        Type: string
+                        Description: Restaurant name to search for.
+                      threshold:
+                        Type: number
+                        Description: Minimum similarity 0-1, defaults to 0.6.
+                    Required: [query]
+                - Name: walking_distance
+                  Description: Walking time between two London locations via Google Distance Matrix.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      from_area:
+                        Type: string
+                        Description: Origin, e.g. 'Shoreditch, London'.
+                      to_query:
+                        Type: string
+                        Description: Destination, typically a restaurant name.
+                    Required: [from_area, to_query]
+                - Name: check_availability
+                  Description: Check MOCKED reservation availability. Data is stubbed - treat results as suggestive not authoritative.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      place_name:
+                        Type: string
+                      area:
+                        Type: string
+                      when:
+                        Type: string
+                        Description: e.g. tonight, tomorrow_lunch, friday_dinner
+                      party_size:
+                        Type: integer
+                        Description: How many people (must be at least 1).
+                    Required: [place_name, area, when, party_size]
+                - Name: recent_visits
+                  Description: List the owner's recent restaurant visits, newest first, going back N days.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      days:
+                        Type: integer
+                        Description: Look-back window in days, defaults to 30.
+                    Required: []
+                - Name: visits_by_companion
+                  Description: Filter visit log by companion name.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      companion:
+                        Type: string
+                        Description: Name of the person.
+                    Required: [companion]
+                - Name: get_list
+                  Description: Return the ENTIRE contents of a saved list (recs or want-to-go). Use sparingly - prefer list_by_area.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      name:
+                        Type: string
+                        Description: Which list to fetch - recs or want-to-go.
+                    Required: [name]
+                - Name: search_google_places
+                  Description: Search Google Places (New) by text query, restricted to London. Returns up to 5 results.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      query:
+                        Type: string
+                        Description: Free-text search.
+                      area:
+                        Type: string
+                        Description: London neighbourhood to bias results toward.
+                    Required: [query, area]
+
+  AddPlaceTarget:
+    Type: AWS::BedrockAgentCore::GatewayTarget
+    Properties:
+      GatewayIdentifier: !Ref Gateway
+      Name: addPlace
+      CredentialProviderConfigurations:
+        - CredentialProviderType: GATEWAY_IAM_ROLE
+      TargetConfiguration:
+        Mcp:
+          Lambda:
+            LambdaArn: !GetAtt AddPlace.Arn
+            ToolSchema:
+              InlinePayload:
+                - Name: add_place
+                  Description: Add a new restaurant to the owner's recs or want-to-go list. Owner-only when called via WhatsApp; playground can call freely.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      name:
+                        Type: string
+                        Description: Restaurant name.
+                      area:
+                        Type: string
+                        Description: London neighbourhood.
+                      cuisine:
+                        Type: string
+                        Description: Cuisine type. Defaults to 'unknown' if omitted.
+                      google_place_id:
+                        Type: string
+                        Description: Google Places ID (from search_google_places).
+                      note:
+                        Type: string
+                        Description: Optional personal note.
+                      target_list:
+                        Type: string
+                        Description: Which list to add to - recs or want-to-go (defaults to want-to-go).
+                    Required: [name, area, google_place_id]
+
+  LogVisitTarget:
+    Type: AWS::BedrockAgentCore::GatewayTarget
+    Properties:
+      GatewayIdentifier: !Ref Gateway
+      Name: logVisit
+      CredentialProviderConfigurations:
+        - CredentialProviderType: GATEWAY_IAM_ROLE
+      TargetConfiguration:
+        Mcp:
+          Lambda:
+            LambdaArn: !GetAtt LogVisit.Arn
+            ToolSchema:
+              InlinePayload:
+                - Name: log_visit
+                  Description: Append a visit to the log. If verdict='recommend' and place was on want-to-go, promotes to recs.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      place_slug:
+                        Type: string
+                        Description: Place slug (use find_place first to resolve names).
+                      visited_on:
+                        Type: string
+                        Description: ISO date YYYY-MM-DD, defaults to today.
+                      verdict:
+                        Type: string
+                        Description: One of recommend, skip, or neutral.
+                      companions:
+                        Type: array
+                        Items:
+                          Type: string
+                      note:
+                        Type: string
+                    Required: [place_slug, verdict]
+
+Outputs:
+  WebhookUrl:
+    Description: Paste this into Meta's webhook config.
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/webhook"
+  DataBucket:
+    Description: Upload the seed JSON files here after first deploy.
+    Value: !Ref DataBucket
+  GatewayId:
+    Description: Reference this Gateway from harness.json.
+    Value: !Ref Gateway
+  GatewayArn:
+    Description: Full Gateway ARN.
+    Value: !GetAtt Gateway.GatewayArn
+  GatewayUrl:
+    Description: MCP endpoint the harness talks to.
+    Value: !GetAtt Gateway.GatewayUrl
+  AddPlaceArn:
+    Description: add_place Lambda ARN.
+    Value: !GetAtt AddPlace.Arn
+  LogVisitArn:
+    Description: log_visit Lambda ARN.
+    Value: !GetAtt LogVisit.Arn
+  WhatsAppSendArn:
+    Description: send_whatsapp Lambda ARN - still used inline by the webhook.
+    Value: !GetAtt WhatsAppSend.Arn
+  RestaurantReadArn:
+    Description: restaurant-read Lambda ARN.
+    Value: !GetAtt RestaurantRead.Arn

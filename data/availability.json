@@ -1,0 +1,88 @@
+{
+  "_note": "MOCKED availability data. Consumer booking APIs (OpenTable, Resy, SevenRooms) are gatekept and not accessible without partner status. This file simulates what a real availability check would return, keyed by restaurant slug. Update ISO date strings to today/tomorrow before demoing.",
+  "_source": "Hand-written fake data for demos.",
+  "availability": {
+    "berenjak-soho": {
+      "tonight": [
+        { "time": "18:30", "party_size_max": 4 },
+        { "time": "21:15", "party_size_max": 2 }
+      ],
+      "tomorrow": [
+        { "time": "19:00", "party_size_max": 6 },
+        { "time": "20:30", "party_size_max": 4 }
+      ]
+    },
+    "gloria-shoreditch": {
+      "tonight": [
+        { "time": "19:45", "party_size_max": 4 },
+        { "time": "20:00", "party_size_max": 2 },
+        { "time": "21:30", "party_size_max": 6 }
+      ],
+      "tomorrow": [
+        { "time": "18:30", "party_size_max": 8 },
+        { "time": "20:00", "party_size_max": 4 }
+      ]
+    },
+    "dishoom-shoreditch": {
+      "tonight": [
+        { "time": "22:00", "party_size_max": 4 }
+      ],
+      "tomorrow": [
+        { "time": "18:00", "party_size_max": 6 },
+        { "time": "19:30", "party_size_max": 4 },
+        { "time": "21:00", "party_size_max": 4 }
+      ]
+    },
+    "padella-borough": {
+      "tonight": [],
+      "tomorrow": [],
+      "_walk_in_only_note": "Padella doesn't take bookings. The agent should say so and suggest going now."
+    },
+    "smoking-goat-shoreditch": {
+      "tonight": [
+        { "time": "18:00", "party_size_max": 4 },
+        { "time": "20:45", "party_size_max": 2 }
+      ],
+      "tomorrow": [
+        { "time": "19:15", "party_size_max": 6 }
+      ]
+    },
+    "roti-king-euston": {
+      "tonight": [],
+      "tomorrow": [],
+      "_walk_in_only_note": "Roti King doesn't take bookings. Suggest going early to beat the queue."
+    },
+    "kol-marylebone": {
+      "tonight": [],
+      "tomorrow": [
+        { "time": "19:00", "party_size_max": 2 }
+      ]
+    },
+    "brat-shoreditch": {
+      "tonight": [
+        { "time": "17:30", "party_size_max": 2 }
+      ],
+      "tomorrow": [
+        { "time": "21:30", "party_size_max": 4 }
+      ]
+    },
+    "akub-notting-hill": {
+      "tonight": [
+        { "time": "19:00", "party_size_max": 4 },
+        { "time": "20:30", "party_size_max": 2 }
+      ],
+      "tomorrow": [
+        { "time": "18:00", "party_size_max": 6 },
+        { "time": "20:00", "party_size_max": 4 }
+      ]
+    },
+    "mambow-clapton": {
+      "tonight": [
+        { "time": "19:45", "party_size_max": 4 }
+      ],
+      "tomorrow": [
+        { "time": "18:30", "party_size_max": 6 }
+      ]
+    }
+  }
+}

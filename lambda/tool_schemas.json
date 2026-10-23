@@ -1,0 +1,225 @@
+{
+  "restaurantRead": [
+    {
+      "name": "list_by_area",
+      "description": "Filter the owner's saved list (recs or want-to-go) by London neighbourhood. Case-insensitive substring match on the place's 'area' field.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": ["recs", "want-to-go"],
+            "description": "Which list to search. 'recs' = places the owner has been to and liked. 'want-to-go' = wishlist."
+          },
+          "area": {
+            "type": "string",
+            "description": "Neighbourhood name to filter by, e.g. 'Shoreditch', 'Soho', 'Hackney'."
+          }
+        },
+        "required": ["name", "area"]
+      }
+    },
+    {
+      "name": "find_place",
+      "description": "Fuzzy-match a place name across BOTH lists (recs and want-to-go). Returns matches sorted by similarity score.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Restaurant name to search for. Case-insensitive."
+          },
+          "threshold": {
+            "type": "number",
+            "description": "Minimum similarity score (0.0 to 1.0) for a match. Defaults to 0.6.",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.6
+          }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "walking_distance",
+      "description": "Compute walking time between two London locations using Google Distance Matrix. Returns walking_minutes and distance_meters.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from_area": {
+            "type": "string",
+            "description": "Origin, e.g. 'Shoreditch, London' or a specific address."
+          },
+          "to_query": {
+            "type": "string",
+            "description": "Destination, typically a restaurant name."
+          }
+        },
+        "required": ["from_area", "to_query"]
+      }
+    },
+    {
+      "name": "check_availability",
+      "description": "Check MOCKED reservation availability for a restaurant at a given time and party size. Returns available slots or a reason it's unavailable. Availability is stubbed data — treat results as suggestive not authoritative.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "place_name": {
+            "type": "string",
+            "description": "Restaurant name (as displayed on the saved list)."
+          },
+          "area": {
+            "type": "string",
+            "description": "Neighbourhood, needed to disambiguate places with the same name."
+          },
+          "when": {
+            "type": "string",
+            "description": "When to check availability, e.g. 'tonight', 'tomorrow_lunch', 'friday_dinner'."
+          },
+          "party_size": {
+            "type": "integer",
+            "description": "How many people.",
+            "minimum": 1
+          }
+        },
+        "required": ["place_name", "area", "when", "party_size"]
+      }
+    },
+    {
+      "name": "recent_visits",
+      "description": "List the owner's recent restaurant visits from the visit log, newest first, going back N days.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "days": {
+            "type": "integer",
+            "description": "Look back this many days. Defaults to 30.",
+            "minimum": 1,
+            "default": 30
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "visits_by_companion",
+      "description": "Filter the owner's visit log by companion name. Returns visits where the named person was present.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "companion": {
+            "type": "string",
+            "description": "Name of the person, e.g. 'Priya', 'Ravi'."
+          }
+        },
+        "required": ["companion"]
+      }
+    },
+    {
+      "name": "get_list",
+      "description": "Return the ENTIRE contents of a saved list. Use sparingly — prefer list_by_area for area-filtered results.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": ["recs", "want-to-go"],
+            "description": "Which list to fetch."
+          }
+        },
+        "required": ["name"]
+      }
+    },
+    {
+      "name": "search_google_places",
+      "description": "Search Google Places (New) by text query, restricted to London. Returns up to 5 results with name, address, rating, price level, and hours. Use this to look up places NOT on the owner's lists (e.g. for adding).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Free-text search, e.g. 'best pizza' or a specific restaurant name."
+          },
+          "area": {
+            "type": "string",
+            "description": "London neighbourhood to bias results toward."
+          }
+        },
+        "required": ["query", "area"]
+      }
+    }
+  ],
+  "addPlace": [
+    {
+      "name": "add_place",
+      "description": "Owner-only. Add a new restaurant to the owner's 'recs' or 'want-to-go' list in S3. Requires actor_id to match the owner's WhatsApp number.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Restaurant name."
+          },
+          "area": {
+            "type": "string",
+            "description": "London neighbourhood."
+          },
+          "cuisine": {
+            "type": "string",
+            "description": "Cuisine type. Defaults to 'unknown' if omitted."
+          },
+          "google_place_id": {
+            "type": "string",
+            "description": "Google Places ID. Obtain via search_google_places first."
+          },
+          "note": {
+            "type": "string",
+            "description": "Optional personal note about the place."
+          },
+          "target_list": {
+            "type": "string",
+            "enum": ["recs", "want-to-go"],
+            "description": "Which list to add to. Defaults to 'want-to-go'.",
+            "default": "want-to-go"
+          }
+        },
+        "required": ["name", "area", "google_place_id"]
+      }
+    }
+  ],
+  "logVisit": [
+    {
+      "name": "log_visit",
+      "description": "Owner-only. Append a visit to the visit log and update the place record. If verdict='recommend' and place was on want-to-go, promotes it to recs. Requires actor_id to match the owner's WhatsApp number.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "place_slug": {
+            "type": "string",
+            "description": "The slug of the place visited (from recs.json or want-to-go.json). Use find_place first to resolve names to slugs."
+          },
+          "visited_on": {
+            "type": "string",
+            "description": "ISO date (YYYY-MM-DD). Defaults to today.",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "verdict": {
+            "type": "string",
+            "enum": ["recommend", "skip", "neutral"],
+            "description": "How the owner felt about it. 'recommend' promotes want-to-go entries to recs."
+          },
+          "companions": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Names of people who came along."
+          },
+          "note": {
+            "type": "string",
+            "description": "Optional note. Overwrites the existing my_note on the place if provided."
+          }
+        },
+        "required": ["place_slug", "verdict"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,518 @@
+{
+  "list_name": "Want to go",
+  "description": "Places I want to try. Grow this by texting the agent 'add X in Y to want-to-go'.",
+  "places": [
+    {
+      "slug": "kol-marylebone",
+      "name": "KOL",
+      "area": "Marylebone",
+      "cuisine": "Mexican fine dining",
+      "vegetarian_friendly": true,
+      "wishlist_reason": "Michelin star, veggie tasting menu."
+    },
+    {
+      "slug": "brat-shoreditch",
+      "name": "BRAT",
+      "area": "Shoreditch",
+      "cuisine": "Basque",
+      "vegetarian_friendly": false,
+      "wishlist_reason": "Whole turbot. Been on the list forever."
+    },
+    {
+      "slug": "akub-notting-hill",
+      "name": "Akub",
+      "area": "Notting Hill",
+      "cuisine": "Palestinian",
+      "vegetarian_friendly": true,
+      "wishlist_reason": "Fadi Kattan's spot."
+    },
+    {
+      "slug": "myka-greek-frozen-yoghurt",
+      "name": "MYKA Greek Frozen Yoghurt",
+      "area": "Marylebone",
+      "cuisine": "Fro-Yo",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "fonda",
+      "name": "Fonda",
+      "area": "Mayfair",
+      "cuisine": "Mexican",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "saawaros",
+      "name": "Saawaros",
+      "area": "Elephant and Castle",
+      "cuisine": "Thai",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "cantoast-bakery",
+      "name": "Cantoast Bakery",
+      "area": "Marylebone",
+      "cuisine": "Bakery",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "the-leaf-london-shoreditch",
+      "name": "THE LEAF London (Shoreditch)\uff5c \u5c0f\u53f6\u5b50",
+      "area": "Shoreditch",
+      "cuisine": "Dessert shop",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "cafe-mama-sons",
+      "name": "Cafe Mama & Sons",
+      "area": "Camden",
+      "cuisine": "Cafe",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "cafe-kowloon-modern-cantonese-restaurant",
+      "name": "Cafe Kowloon - Modern Cantonese Restaurant",
+      "area": "Hackney",
+      "cuisine": "Cantonese",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "flipdog",
+      "name": "FlipDog",
+      "area": "Old Street",
+      "cuisine": "Bar",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "holy-carrot",
+      "name": "Holy Carrot",
+      "area": "Notting Hill",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "impala",
+      "name": "Impala",
+      "area": "Soho",
+      "cuisine": "Mediterranean",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "homies-on-donkeys",
+      "name": "Homies On Donkeys",
+      "area": "Bushwood",
+      "cuisine": "Mexican",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "logma",
+      "name": "Logma",
+      "area": "Bethnal Green",
+      "cuisine": "Middle Eastern",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "aya-suki",
+      "name": "AYA & SUKI",
+      "area": "Hackney",
+      "cuisine": "Vegetarian",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "marksman",
+      "name": "Marksman",
+      "area": "Bethnal Green",
+      "cuisine": "Pub",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "tigermilk-tottenham-court-road",
+      "name": "Tigermilk - Tottenham Court Road",
+      "area": "Covent Garden",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "mestizo-chelsea-mexican-restaurant-margarita-bar",
+      "name": "Mestizo Chelsea: Mexican Restaurant & Margarita Bar",
+      "area": "Chelsea",
+      "cuisine": "Mexican",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "fika",
+      "name": "Fika",
+      "area": "Lower Clapton",
+      "cuisine": "Coffee shop",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "running-late-coffee",
+      "name": "Running Late Coffee",
+      "area": "Hackney",
+      "cuisine": "Cafe",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "common-breads",
+      "name": "Common Breads",
+      "area": "Belgravia",
+      "cuisine": "Bakery",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "slowburn-london",
+      "name": "SlowBurn London",
+      "area": "Walthamstow",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "miga",
+      "name": "Miga",
+      "area": "Hackney",
+      "cuisine": "Korean",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "jandadiner",
+      "name": "JandaDiner",
+      "area": "Peckham",
+      "cuisine": "Malaysian",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "the-hero-maida-vale",
+      "name": "The Hero - Maida Vale",
+      "area": "Maida Vale",
+      "cuisine": "Pub",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "74-duke",
+      "name": "74 Duke",
+      "area": "Mayfair",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "table-at-464",
+      "name": "Table at 464",
+      "area": "Hackney",
+      "cuisine": "Wine Bar",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "waltz",
+      "name": "Waltz",
+      "area": "Shoreditch",
+      "cuisine": "Cocktail Bar",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "jackson-boxer-at-the-corner",
+      "name": "Jackson Boxer At The Corner",
+      "area": "Marylebone",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "lagom",
+      "name": "Lagom",
+      "area": "Hackney",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "mc-sons-borough",
+      "name": "Mc & Sons Borough",
+      "area": "Southwark",
+      "cuisine": "Irish Pub",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "the-camberwell-arms",
+      "name": "The Camberwell Arms",
+      "area": "Camberwell",
+      "cuisine": "Pub",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "jambo-zamsareh-ugandan-restaurant",
+      "name": "Jambo Zamsareh (Ugandan) Restaurant",
+      "area": "South Tottenham",
+      "cuisine": "Ugandan",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "pomme-bakery",
+      "name": "Pomme Bakery",
+      "area": "Bethnal Green",
+      "cuisine": "Bakery",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "kruk",
+      "name": "Kruk",
+      "area": "Peckham",
+      "cuisine": "Thai",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "the-sensational-sandwich-shop",
+      "name": "The Sensational Sandwich Shop",
+      "area": "Southwark",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "sino",
+      "name": "SINO",
+      "area": "Notting Hill",
+      "cuisine": "Ukrainian",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "adoh-sri-lankan-street-food-covent-garden",
+      "name": "ADOH! Sri Lankan Street Food, Covent Garden",
+      "area": "Covent Garden",
+      "cuisine": "Sri Lankan",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "colombo-kitchen-putney-hopper-and-kottu-bar",
+      "name": "Colombo Kitchen Putney - Hopper and Kottu Bar",
+      "area": "Putney",
+      "cuisine": "Sri Lankan",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "aguamiel-churros-mexicanos",
+      "name": "Aguamiel Churros Mexicanos",
+      "area": "Covent Garden",
+      "cuisine": "Churros",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "godet",
+      "name": "Godet",
+      "area": "Islington",
+      "cuisine": "Wine Bar",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "vicino-pizza-pasta-restaurant-and-bar",
+      "name": "Vicino Pizza Pasta Restaurant and Bar",
+      "area": "Fulham",
+      "cuisine": "Pizza",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "discount-suit-company",
+      "name": "Discount Suit Company",
+      "area": "Shoreditch",
+      "cuisine": "Cocktail Bar",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "kossoffs",
+      "name": "Kossoffs",
+      "area": "Kentish Town",
+      "cuisine": "Bakery",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "araw-ice-cream-at-brityard",
+      "name": "Araw Ice Cream at Brityard",
+      "area": "Mayfair",
+      "cuisine": "Ice Cream",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "mauby",
+      "name": "MAUBY",
+      "area": "Brockley",
+      "cuisine": "Bar",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "nina",
+      "name": "Nina",
+      "area": "Marylebone",
+      "cuisine": "Italian",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "bottarga",
+      "name": "Bottarga",
+      "area": "Chelsea",
+      "cuisine": "Greek",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "lupa",
+      "name": "Lupa",
+      "area": "Highbury",
+      "cuisine": "Italian",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "kix",
+      "name": "KIX",
+      "area": "East Dulwich",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "empire-empire",
+      "name": "Empire Empire",
+      "area": "Notting Hill",
+      "cuisine": "Indian",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "mahali-bakery-by-mahali-and-co",
+      "name": "Mahali Bakery by Mahali and Co",
+      "area": "Battersea",
+      "cuisine": "Bakery",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "corrochio-s",
+      "name": "Corrochio's",
+      "area": "Stoke Newington",
+      "cuisine": "Mexican",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "calong",
+      "name": "Calong",
+      "area": "Stoke Newington",
+      "cuisine": "Bistro",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "fkabam-restaurant",
+      "name": "FKABAM RESTAURANT",
+      "area": "Islington",
+      "cuisine": "Restaurant",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "lever-bloom-coffee",
+      "name": "Lever & Bloom Coffee",
+      "area": "Covent Garden",
+      "cuisine": "Coffee",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "seed-library",
+      "name": "Seed Library",
+      "area": "Shoreditch",
+      "cuisine": "Cocktail bar",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "canteen-notting-hill",
+      "name": "Canteen | Notting Hill",
+      "area": "North Kensington",
+      "cuisine": "Italian",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "hjem",
+      "name": "Hjem",
+      "area": "Kensington",
+      "cuisine": "Bakery",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "akoko",
+      "name": "Akoko",
+      "area": "Fitzrovia",
+      "cuisine": "West African",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "apricity-restaurant",
+      "name": "Apricity Restaurant",
+      "area": "Mayfair",
+      "cuisine": "Modern European",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "chuku-s-tottenham",
+      "name": "Chuku's (Tottenham)",
+      "area": "Tottenham",
+      "cuisine": "West African",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    },
+    {
+      "slug": "ida",
+      "name": "Ida",
+      "area": "North Kensington",
+      "cuisine": "Italian",
+      "vegetarian_friendly": null,
+      "wishlist_reason": ""
+    }
+  ]
+}
